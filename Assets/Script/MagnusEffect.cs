@@ -25,4 +25,14 @@ public class MagnusEffect : MonoBehaviour
             _isShoot = true;
         }
     }
+
+    void FixedUpdate()
+    {
+        if (!_isShoot) return;
+        Vector3 velocity = _rb.linearVelocity;
+        Vector3 spin = _rb.angularVelocity;
+
+        Vector3 magnusForce = magnusStrength * Vector3.Cross(spin, velocity);
+        _rb.AddForce(magnusForce);
+    }
 }
